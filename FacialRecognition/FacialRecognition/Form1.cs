@@ -77,9 +77,6 @@ namespace FacialRecognition
         }
         void FrameGrabber(object sender, EventArgs e)
         {
-            
-            
-
                 currentFrame = grabber.QueryFrame().Resize(320, 240, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
 
                 gray = currentFrame.Convert<Gray, Byte>();
@@ -89,14 +86,11 @@ namespace FacialRecognition
 
                 foreach (MCvAvgComp f in facesDetected[0])
                 {
-
                     t = t + 1;
 
                     result = currentFrame.Copy(f.rect).Convert<Gray, byte>().Resize(100, 100, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
 
                     currentFrame.Draw(f.rect, new Bgr(Color.Red), 2);
-
-
                 }
 
                 imageBox1.Image = currentFrame;
@@ -117,7 +111,6 @@ namespace FacialRecognition
             TrainedFace = result.Resize(100, 100, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
            
             imageBox2.Image = TrainedFace;
-           
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -131,7 +124,7 @@ namespace FacialRecognition
            
             for (int i = 1; i < trainingImages.ToArray().Length + 1; i++)
             {
-                trainingImages.ToArray()[i - 1].Save(Application.StartupPath + "/TrainedFaces/face" + i + ".bmp");//sav faces to folder with name face(i)i is no. of face and .bmp extension of detected face image
+                trainingImages.ToArray()[i - 1].Save(Application.StartupPath + "/TrainedFaces/face" + i + ".bmp");//save faces to folder with name face(i)i is no. of face and .bmp extension of detected face image
                 File.AppendAllText(Application.StartupPath + "/TrainedFaces/TrainedLabels.txt", labels.ToArray()[i - 1] + "%");//save names to text file
             }
             MessageBox.Show("Image trained and save to database");
@@ -143,27 +136,6 @@ namespace FacialRecognition
             StartScreen s = new StartScreen();
             s.Show();
             this.Hide();
-                                
-
-        }
-
-       
-       
-
-       
-
-       
-       
-
-       
-       
-
-       
-
-        
-
-        
-        
-       
+        }      
     }
 }
